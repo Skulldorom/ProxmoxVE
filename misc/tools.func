@@ -289,10 +289,10 @@ setup_mariadb() {
   curl -fsSL "https://mariadb.org/mariadb_release_signing_key.asc" |
     gpg --dearmor -o /etc/apt/trusted.gpg.d/mariadb.gpg
 
-  echo "deb [signed-by=/etc/apt/trusted.gpg.d/mariadb.gpg] https://archive.mariadb.org/mariadb-${MARIADB_VERSION}/repo/${CURRENT_OS} ${DISTRO_CODENAME} main" \
+  echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/mariadb.gpg] https://archive.mariadb.org/mariadb-${MARIADB_VERSION}/repo/${CURRENT_OS} ${DISTRO_CODENAME} main" \
     >/etc/apt/sources.list.d/mariadb.list
 
-  $STD apt-get update
+  $STD apt-get -o Acquire::http::AllowRedirect=false update
 
   local MARIADB_MAJOR_MINOR
   MARIADB_MAJOR_MINOR=$(echo "$MARIADB_VERSION" | awk -F. '{print $1"."$2}')
@@ -303,7 +303,7 @@ setup_mariadb() {
       echo "mariadb-server-$ver mariadb-server/feedback boolean false" | debconf-set-selections
     done
   fi
-  DEBIAN_FRONTEND=noninteractive $STD apt-get install -y mariadb-server mariadb-client
+  DEBIAN_FRONTEND=noninteractive $STD apt-get -o Acquire::http::AllowRedirect=false install -y mariadb-server mariadb-client
 
   msg_ok "Setup MariaDB $MARIADB_VERSION"
 }
