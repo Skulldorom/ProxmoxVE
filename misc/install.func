@@ -147,7 +147,7 @@ EOF
   rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
   msg_ok "Updated Container OS"
 
-  source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/tools.func)
+  source <(curl -fsSL https://raw.githubusercontent.com/Skulldorom/ProxmoxVE/main/misc/tools.func)
 }
 
 # This function modifies the message of the day (motd) and SSH settings
