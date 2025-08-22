@@ -258,7 +258,7 @@ setup_mariadb() {
   curl -fsSL "https://mariadb.org/mariadb_release_signing_key.asc" |
     gpg --dearmor -o /etc/apt/trusted.gpg.d/mariadb.gpg
 
-  echo "deb [signed-by=/etc/apt/trusted.gpg.d/mariadb.gpg] https://deb.mariadb.org/${MARIADB_VERSION}/${CURRENT_OS} ${DISTRO_CODENAME} main" \
+  echo "deb [signed-by=/etc/apt/trusted.gpg.d/mariadb.gpg] https://archive.mariadb.org/mariadb-${MARIADB_VERSION}/repo/${CURRENT_OS} ${DISTRO_CODENAME} main" \
     >/etc/apt/sources.list.d/mariadb.list
 
   $STD apt-get update
